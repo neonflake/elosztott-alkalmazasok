@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package hu.gdf;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -10,26 +10,45 @@ package hu.gdf;
  */
 public class GameDemo {
     
+    private final List<Actor> actors = new ArrayList();
+    
     public GameDemo() {
-        PlayerCharacter player1 = new Fighter("Gourry", 2);
-        PlayerCharacter player2 = new Magician("Lina", 3);
-        Actor npc = new NonPlayerCharacter("Villager");
-        System.out.println(player1);
-        System.out.println(player2);
-        System.out.println(npc);
-        try {
-            Actor npcCopy = ((NonPlayerCharacter)npc).clone();
-            System.out.println(npcCopy);
-        } catch (CloneNotSupportedException exception) {
-            System.out.println("Clone failed");
+        initActors();
+    }
+    
+    private void initActors() {
+        NonPlayerCharacter npc = new NonPlayerCharacter("Villager");
+        for (int i = 0; i < 3;i++) {
+            try {
+                actors.add(npc.clone());
+            } catch (CloneNotSupportedException exception) {
+                System.out.println("Adding NPC failed");
+            } 
         }
+        PlayerCharacter player1 = new Fighter("Gourry", 2);
         player1.addTool(new Tool("Sword of light"));
-        player1.useTool(0);
-        player1.useTool(0);
-        System.out.println(player1);
+        actors.add(player1);
+        PlayerCharacter player2 = new Magician("Lina", 3);
         player2.addTool(new Tool("Fireball spell"));
-        player2.useTool(0);
-        player2.useTool(0);
-        System.out.println(player2);
+        actors.add(player2);
+        Collections.sort(actors);
+    }
+    
+    public void showActors() {
+        System.out.println("List of actors by name:");
+        actors.stream().forEach(actor -> System.out.println(actor));
+        System.out.println();
+    }
+    
+    public void doSomeAction() {
+        System.out.println("A fight has broken out!");
+        for (int i = 0; i < 3;i++) {
+            for (Actor actor : actors) {
+                if (actor instanceof PlayerCharacter) {
+                    ((PlayerCharacter)actor).useTool(0);
+                }
+            }
+        }
+        System.out.println();
     }
 }

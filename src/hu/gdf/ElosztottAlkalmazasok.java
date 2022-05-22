@@ -7,6 +7,9 @@ package hu.gdf;
 public class ElosztottAlkalmazasok {
 
     public static void main(String[] args) {
-        new GameDemo();
+        GameDemo game = new GameDemo();
+        game.showActors();
+        game.doSomeAction();
+        game.showActors();
     }
 }
