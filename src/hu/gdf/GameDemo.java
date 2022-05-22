@@ -11,8 +11,8 @@ package hu.gdf;
 public class GameDemo {
     
     public GameDemo() {
-        Actor player1 = new Fighter("Goury");
-        Actor player2 = new Magician("Lina", 3);
+        PlayerCharacter player1 = new Fighter("Gourry", 2);
+        PlayerCharacter player2 = new Magician("Lina", 3);
         Actor npc = new NonPlayerCharacter("Villager");
         System.out.println(player1);
         System.out.println(player2);
@@ -23,5 +23,13 @@ public class GameDemo {
         } catch (CloneNotSupportedException exception) {
             System.out.println("Clone failed");
         }
+        player1.addTool(new Tool("Sword of light"));
+        player1.useTool(0);
+        player1.useTool(0);
+        System.out.println(player1);
+        player2.addTool(new Tool("Fireball spell"));
+        player2.useTool(0);
+        player2.useTool(0);
+        System.out.println(player2);
     }
 }
