@@ -34,13 +34,13 @@ public class GameDemo {
         Collections.sort(actors);
     }
     
-    public void showActors() {
+    public void listActors() {
         System.out.println("List of actors by name:");
         actors.stream().forEach(actor -> System.out.println(actor));
         System.out.println();
     }
     
-    public void doSomeAction() {
+    public void simulateFight() {
         System.out.println("A fight has broken out!");
         for (int i = 0; i < 3;i++) {
             for (Actor actor : actors) {
