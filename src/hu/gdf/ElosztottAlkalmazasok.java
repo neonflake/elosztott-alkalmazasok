@@ -7,7 +7,6 @@ package hu.gdf;
 public class ElosztottAlkalmazasok {
 
     public static void main(String[] args) {
-        System.out.println("Futok!");
+        new GameDemo();
     }
-    
 }

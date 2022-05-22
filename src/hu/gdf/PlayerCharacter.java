@@ -8,14 +8,14 @@ package hu.gdf;
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public class Player extends Character {
+public abstract class PlayerCharacter extends Actor {
     protected int points;
 
-    public Player(String name) {
+    public PlayerCharacter(String name) {
         this(name, 1);
     }
     
-    public Player(String name, int level) {
+    public PlayerCharacter(String name, int level) {
         this.name = name;
         if (level < 1) {
            System.out.println("Tapasztalati szint minimum 1!");

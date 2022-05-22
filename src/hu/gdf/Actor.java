@@ -8,7 +8,7 @@ package hu.gdf;
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public abstract class Character {
+public abstract class Actor {
     protected String name;
     protected int level;
 
@@ -22,6 +22,11 @@ public abstract class Character {
 
     public void levelUp() {
         level++;
+    }
+    
+    @Override
+    public String toString() {
+        return name + " <" + level + ">";
     }
 }
 
