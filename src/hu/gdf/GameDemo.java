@@ -1,5 +1,6 @@
 package hu.gdf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,15 +9,20 @@ import java.util.List;
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public class GameDemo {
+public class GameDemo{
     
-    private final List<Actor> actors = new ArrayList();
+    private List<Actor> actors;
+    private GameData gameData = new GameData();
     
     public GameDemo() {
-        initActors();
+        actors = gameData.readActorsFromDisk();
+        if (actors == null) {
+            initActors();
+        }
     }
     
     private void initActors() {
+        actors = new ArrayList();
         NonPlayerCharacter npc = new NonPlayerCharacter("Villager");
         for (int i = 0; i < 3;i++) {
             try {
@@ -50,5 +56,13 @@ public class GameDemo {
             }
         }
         System.out.println();
+    }
+    
+    public void saveGameState() {
+        gameData.writeActorsToDisk(actors);
+    }
+    
+    public void resetGameState() {
+        gameData.deleteActorsFromDisk();
     }
 }

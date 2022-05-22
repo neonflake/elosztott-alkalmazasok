@@ -1,10 +1,12 @@
 package hu.gdf;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public class Tool {
+public class Tool implements Serializable {
 
     private final String name;
     

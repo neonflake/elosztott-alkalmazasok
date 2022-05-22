@@ -11,12 +11,14 @@ public class ElosztottAlkalmazasok {
         System.out.println("Interactive game demo (use the commands below)");
         System.out.println("list - list all actors by name");
         System.out.println("fight - simulate a fight for players");
-        System.out.println("exit - quits the demo");
+        System.out.println("pause - quit the demo and save progress");
+        System.out.println("exit - quit the demo and reset game state");
         System.out.println();
         boolean running = true;
         while (running) {
             switch (ConsoleReader.readInput()) {
                 case "exit":
+                    game.resetGameState();
                     running = false;
                     break;
                 case "list":
@@ -25,8 +27,12 @@ public class ElosztottAlkalmazasok {
                 case "fight":
                     game.simulateFight();
                     break;
+                case "pause":
+                    running = false;
+                    game.saveGameState();
+                    break;
             }
         }
-        System.out.println();
+        System.exit(0);
     }
 }

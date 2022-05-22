@@ -1,10 +1,12 @@
 package hu.gdf;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public abstract class Actor implements Comparable<Actor> {
+public abstract class Actor implements Comparable<Actor>, Serializable {
     protected String name;
     protected int level;
 
