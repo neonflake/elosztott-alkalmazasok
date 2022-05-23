@@ -24,7 +24,7 @@ public class GameDemo{
         }
     }
     
-    public void setGameWindow() {
+    public void setGameWindow(GameWindow window) {
         this.window = window;
     }
     
@@ -72,6 +72,8 @@ public class GameDemo{
         }
         if (window == null) {
             ConsoleHelper.writeToConsole(text);
+        } else {
+            window.displayOnWindow(text);
         }
     }
     

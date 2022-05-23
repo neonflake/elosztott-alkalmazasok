@@ -4,6 +4,8 @@
  */
 package hu.gdf;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.DefaultListModel;
 
@@ -21,15 +23,28 @@ public class GameWindow extends javax.swing.JFrame {
     public GameWindow(GameDemo game) {
         this.game = game;
         initComponents();
-        updateActorList();
+        updateActorList(true);
     }
     
-    public void updateActorList() {
+    public void updateActorList(boolean listByName) {
         List<Actor> actors = game.getActors();
         DefaultListModel<Actor> model = new DefaultListModel<>();
+        if (listByName) {
+            Collections.sort(actors);
+        } else {
+            Comparator<Actor> levelComparator = (a1, a2) -> Integer.valueOf(a2.getLevel()).compareTo(a1.getLevel());
+            actors.sort(levelComparator);
+        }
         model.addAll(actors);
         actorList.setModel(model);
         
+    }
+    
+    public void displayOnWindow(StringBuilder text) {
+        infoArea.setText(infoArea.getText()
+                .concat(text.toString())
+                .concat("\n"));
+        infoArea.setCaretPosition(0);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,12 +72,27 @@ public class GameWindow extends javax.swing.JFrame {
 
         nameButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameButton.setText("List by name");
+        nameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameButtonActionPerformed(evt);
+            }
+        });
 
         levelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         levelButton.setText("List by level");
+        levelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                levelButtonActionPerformed(evt);
+            }
+        });
 
         fightButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         fightButton.setText("Fight");
+        fightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fightButtonActionPerformed(evt);
+            }
+        });
 
         infoArea.setColumns(20);
         infoArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -73,34 +103,34 @@ public class GameWindow extends javax.swing.JFrame {
         FramePanel.setLayout(FramePanelLayout);
         FramePanelLayout.setHorizontalGroup(
             FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FramePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
+            .addGroup(FramePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FramePanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-                        .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(levelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(22, 22, 22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(levelButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fightButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
         );
         FramePanelLayout.setVerticalGroup(
             FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FramePanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(FramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FramePanelLayout.createSequentialGroup()
                         .addComponent(nameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addGap(34, 34, 34)
                         .addComponent(levelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(38, 38, 38)
                         .addComponent(fightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,6 +146,18 @@ public class GameWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameButtonActionPerformed
+        updateActorList(true);
+    }//GEN-LAST:event_nameButtonActionPerformed
+
+    private void levelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelButtonActionPerformed
+        updateActorList(false);
+    }//GEN-LAST:event_levelButtonActionPerformed
+
+    private void fightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fightButtonActionPerformed
+        game.simulateFight();
+    }//GEN-LAST:event_fightButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

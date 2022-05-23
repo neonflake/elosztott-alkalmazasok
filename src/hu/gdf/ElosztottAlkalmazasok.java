@@ -41,6 +41,7 @@ public class ElosztottAlkalmazasok {
     
     private static void runGameOnWindow(GameDemo game) {
         GameWindow window = new GameWindow(game);
+        game.setGameWindow(window);
         window.setTitle("Interactive Game Demo");
         window.setVisible(true);
         window.setResizable(false);
