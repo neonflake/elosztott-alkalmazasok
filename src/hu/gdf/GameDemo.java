@@ -1,6 +1,5 @@
 package hu.gdf;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,15 +12,20 @@ public class GameDemo{
     
     private List<Actor> actors;
     private GameData gameData = new GameData();
+    private GameWindow window = null;
     
     public GameDemo() {
         actors = gameData.readActorsFromDisk();
         if (actors == null) {
-            System.out.println("No save found: starting in a clean state\n");
+            ConsoleHelper.writeToConsole("No save found: starting in a clean state\n");
             initActors();
         } else {
-            System.out.println("Save found: loading previous state\n");
+            ConsoleHelper.writeToConsole("Save found: loading previous state\n");
         }
+    }
+    
+    public void setGameWindow() {
+        this.window = window;
     }
     
     public List<Actor> getActors() {
@@ -35,7 +39,7 @@ public class GameDemo{
             try {
                 actors.add(npc.clone());
             } catch (CloneNotSupportedException exception) {
-                System.out.println("Adding NPC failed");
+                ConsoleHelper.writeToConsole("Adding NPC failed");
             } 
         }
         PlayerCharacter player1 = new Fighter("Gourry", 2);
@@ -44,25 +48,31 @@ public class GameDemo{
         PlayerCharacter player2 = new Mage("Lina", 3);
         player2.addTool(new Tool("Fireball spell"));
         actors.add(player2);
+        PlayerCharacter player3 = new Mage("Amelia", 1);
+        actors.add(player3);
         Collections.sort(actors);
     }
     
     public void listActors() {
-        System.out.println("Actors listed by name:");
-        actors.stream().forEach(actor -> System.out.println(actor));
-        System.out.println();
+        StringBuilder text = new StringBuilder("Actors listed by name:\n");
+        actors.stream().forEach(actor -> text.append(actor.toString()).append("\n"));
+        if (window == null) {
+            ConsoleHelper.writeToConsole(text.toString());
+        }
     }
     
     public void simulateFight() {
-        System.out.println("A fight has broken out!");
+        StringBuilder text = new StringBuilder("A fight has broken out!\n");
         for (int i = 0; i < 3;i++) {
             for (Actor actor : actors) {
                 if (actor instanceof PlayerCharacter) {
-                    ((PlayerCharacter)actor).useTool(0);
+                    text.append(((PlayerCharacter)actor).useTool(0)).append("\n");
                 }
             }
         }
-        System.out.println();
+        if (window == null) {
+            ConsoleHelper.writeToConsole(text);
+        }
     }
     
     public void saveGameState() {

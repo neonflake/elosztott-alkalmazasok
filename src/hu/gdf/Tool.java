@@ -14,8 +14,8 @@ public class Tool implements Serializable {
         this.name = name;
     }
     
-    public void use() {
-        System.out.println(" uses the " + name);
+    public String use() {
+        return (" uses the " + name);
     }
     
     public String getName() {

@@ -20,8 +20,8 @@ public abstract class PlayerCharacter extends Actor implements ToolUser {
         super(name, level);
     }
     
-    private void increaseExperiencePoints() {
-        experiencePoints += 5;
+    private void increaseExperiencePoints(int amount) {
+        experiencePoints += amount;
         if (experiencePoints % 10 == 0) {
             increaseLevel();
         }
@@ -33,13 +33,15 @@ public abstract class PlayerCharacter extends Actor implements ToolUser {
     }
     
     @Override
-    public void useTool(int toolIndex) {
+    public String useTool(int toolIndex) {
+        String text = getName();
         if (toolIndex < tools.size() && toolIndex > -1) {
-            System.out.print(getName());
-            tools.get(toolIndex).use();
-            increaseExperiencePoints();
+            text = text + tools.get(toolIndex).use();
+            increaseExperiencePoints(5);
         } else {
-            System.out.println(getName() + " has no such tool!");
+            increaseExperiencePoints(2);
+            text = text + " uses kicks and punches";
         }
+        return text;
     }
 }

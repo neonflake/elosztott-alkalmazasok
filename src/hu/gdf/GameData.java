@@ -26,8 +26,7 @@ public class GameData {
             objectOutputStream.close();
             fileOutputStream.close();
         } catch (IOException exception) {
-            System.out.println(exception);
-            System.out.println("Save game error!");
+            ConsoleHelper.writeToConsole("Save game error!");
         }
     }
     
@@ -41,7 +40,7 @@ public class GameData {
             objectInputStream.close();
             fileInputStream.close();
             } catch (IOException | ClassNotFoundException exception) {
-                System.out.println("Load game error!");
+                ConsoleHelper.writeToConsole("Load game error!");
             }  
         }
         return actors;
@@ -53,7 +52,7 @@ public class GameData {
             try {
                 file.delete();
             } catch (Exception IOException) {
-                System.out.println("Reset game error!");
+                ConsoleHelper.writeToConsole("Reset game error!");
             }
         }
     }

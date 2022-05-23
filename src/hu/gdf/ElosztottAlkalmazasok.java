@@ -9,18 +9,18 @@ import javax.swing.JFrame;
 public class ElosztottAlkalmazasok {
 
     public static void main(String[] args) {
-        System.out.println("Interactive Game Demo\n"); 
+        ConsoleHelper.writeToConsole("Interactive Game Demo\n"); 
         showCommandsOnConsole();
         runGameOnConsole(new GameDemo());
     }
     
     private static void runGameOnConsole(GameDemo game) {
-        boolean running = true;
-        while (running) {
-            switch (ConsoleReader.readInput()) {
+        boolean runOnConsole = true;
+        while (runOnConsole) {
+            switch (ConsoleHelper.readFromConsole()) {
                 case "exit":
                     game.resetGameState();
-                    running = false;
+                    runOnConsole = false;
                     break;
                 case "list":
                     game.listActors();
@@ -29,12 +29,12 @@ public class ElosztottAlkalmazasok {
                     game.simulateFight();
                     break;
                 case "pause":
-                    running = false;
                     game.saveGameState();
+                    runOnConsole = false;
                     break;
                 case "gui":
-                    running = false;
                     runGameOnWindow(game);
+                    runOnConsole = false;
             }
         }
     }
@@ -48,11 +48,12 @@ public class ElosztottAlkalmazasok {
     }
     
     private static void showCommandsOnConsole() {
-        System.out.println("Commands available:");
-        System.out.println("list - list all actors by name");
-        System.out.println("fight - simulate a fight for players");
-        System.out.println("pause - quit the demo and save progress");
-        System.out.println("gui - continue the demo on a graphical interface");
-        System.out.println("exit - quit the demo and reset game state\n");
+        StringBuilder text = new StringBuilder("Commands available:\n")
+                .append("list - list all actors by name\n")
+                .append("fight - simulate a fight for players\n")
+                .append("pause - quit the demo and save progress\n")
+                .append("gui - continue the demo on a graphical interface\n")
+                .append("exit - quit the demo and reset game state\n");
+        ConsoleHelper.writeToConsole(text);
     }
 }

@@ -8,5 +8,5 @@ public interface ToolUser {
     
     public void addTool(Tool tool);
     
-    public void useTool(int toolIndex);
+    public String useTool(int toolIndex);
 }
