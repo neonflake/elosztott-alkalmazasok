@@ -4,18 +4,18 @@ package hu.gdf;
  *
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
-public class Magician extends PlayerCharacter{
+public class Mage extends PlayerCharacter{
     
-    public Magician(String name) {
+    public Mage(String name) {
         super(name);
     }
     
-    public Magician(String name, int level) {
+    public Mage(String name, int level) {
         super(name, level);
     }
     
     @Override
     public String toString() {
-        return super.toString() + " - Magician";
+        return super.toString() + " - Mage";
     }
 }

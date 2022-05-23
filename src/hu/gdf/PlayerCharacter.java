@@ -9,26 +9,21 @@ import java.util.List;
  */
 public abstract class PlayerCharacter extends Actor implements ToolUser {
     
-    protected List<Tool> tools = new ArrayList();
-    protected int points;
-
+    private final List<Tool> tools = new ArrayList();
+    private int experiencePoints;
+    
     public PlayerCharacter(String name) {
-        this(name, 1);
+        super(name);
     }
     
     public PlayerCharacter(String name, int level) {
-        this.name = name;
-        if (level < 1) {
-           System.out.println("The minimum level is 1!");
-           level = 1;
-        }
-        this.level = level;
+        super(name, level);
     }
     
-    private void increasePoints() {
-        points += 5;
-        if (points % 10 == 0) {
-            level++;
+    private void increaseExperiencePoints() {
+        experiencePoints += 5;
+        if (experiencePoints % 10 == 0) {
+            increaseLevel();
         }
     }
     
@@ -40,11 +35,11 @@ public abstract class PlayerCharacter extends Actor implements ToolUser {
     @Override
     public void useTool(int toolIndex) {
         if (toolIndex < tools.size() && toolIndex > -1) {
-            System.out.print(name);
-            tools.get(0).use();
-            increasePoints();
+            System.out.print(getName());
+            tools.get(toolIndex).use();
+            increaseExperiencePoints();
         } else {
-            System.out.println(name + " has no such tool!");
+            System.out.println(getName() + " has no such tool!");
         }
     }
 }

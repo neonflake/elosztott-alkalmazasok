@@ -17,7 +17,10 @@ public class GameDemo{
     public GameDemo() {
         actors = gameData.readActorsFromDisk();
         if (actors == null) {
+            System.out.println("No save found: starting in a clean state\n");
             initActors();
+        } else {
+            System.out.println("Save found: loading previous state\n");
         }
     }
     
@@ -34,14 +37,14 @@ public class GameDemo{
         PlayerCharacter player1 = new Fighter("Gourry", 2);
         player1.addTool(new Tool("Sword of light"));
         actors.add(player1);
-        PlayerCharacter player2 = new Magician("Lina", 3);
+        PlayerCharacter player2 = new Mage("Lina", 3);
         player2.addTool(new Tool("Fireball spell"));
         actors.add(player2);
         Collections.sort(actors);
     }
     
     public void listActors() {
-        System.out.println("List of actors by name:");
+        System.out.println("Actors listed by name:");
         actors.stream().forEach(actor -> System.out.println(actor));
         System.out.println();
     }

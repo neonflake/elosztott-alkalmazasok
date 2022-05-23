@@ -7,13 +7,13 @@ package hu.gdf;
 public class ElosztottAlkalmazasok {
 
     public static void main(String[] args) {
+        System.out.println("Interactive Game Demo\n"); 
         GameDemo game = new GameDemo();
-        System.out.println("Interactive game demo (use the commands below)");
-        System.out.println("list - list all actors by name");
-        System.out.println("fight - simulate a fight for players");
-        System.out.println("pause - quit the demo and save progress");
-        System.out.println("exit - quit the demo and reset game state");
-        System.out.println();
+        showCommandsOnConsole();
+        runGameOnConsole(game);
+    }
+    
+    private static void runGameOnConsole(GameDemo game) {
         boolean running = true;
         while (running) {
             switch (ConsoleReader.readInput()) {
@@ -34,5 +34,13 @@ public class ElosztottAlkalmazasok {
             }
         }
         System.exit(0);
+    }
+    
+    private static void showCommandsOnConsole() {
+        System.out.println("Commands available:");
+        System.out.println("list - list all actors by name");
+        System.out.println("fight - simulate a fight for players");
+        System.out.println("pause - quit the demo and save progress");
+        System.out.println("exit - quit the demo and reset game state\n");
     }
 }

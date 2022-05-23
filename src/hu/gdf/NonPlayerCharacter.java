@@ -7,15 +7,14 @@ package hu.gdf;
 public class NonPlayerCharacter extends Actor implements Cloneable {
     
     public NonPlayerCharacter(String name) {
-        this.name = name;
-        this.level = 1;
+        super(name);
     }
     
     @Override
     public NonPlayerCharacter clone() throws CloneNotSupportedException{
         NonPlayerCharacter clone = (NonPlayerCharacter)super.clone();
-        clone.setName(name);
-        clone.setLevel(level);
+        clone.setName(getName());
+        clone.setLevel(getLevel());
         return clone;
     }
     

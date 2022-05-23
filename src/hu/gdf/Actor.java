@@ -7,9 +7,19 @@ import java.io.Serializable;
  * @author Erős Ákos <wlxgpb@neptun.gdf.hu>
  */
 public abstract class Actor implements Comparable<Actor>, Serializable {
-    protected String name;
-    protected int level;
 
+    private String name;
+    private int level;
+
+    public Actor (String name) {
+        this(name, 1);
+    }
+    
+    public Actor (String name, int level) {
+        this.name = name;
+        this.level = level >= 1 ? level : 1;
+    }
+    
     public String getName() {
         return name;
     }
@@ -22,11 +32,11 @@ public abstract class Actor implements Comparable<Actor>, Serializable {
         return level;
     }
     
-        public void setLevel(int level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public void levelUp() {
+    public void increaseLevel() {
         level++;
     }
     
