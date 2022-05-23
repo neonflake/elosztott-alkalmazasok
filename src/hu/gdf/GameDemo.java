@@ -34,8 +34,11 @@ public class GameDemo{
     
     private void initActors() {
         actors = new ArrayList();
+        actors.add(new NonPlayerCharacter("Farmer"));
+        actors.add(new NonPlayerCharacter("Bartender"));
         NonPlayerCharacter npc = new NonPlayerCharacter("Villager");
-        for (int i = 0; i < 3;i++) {
+        actors.add(npc);
+        for (int i = 0; i < 2;i++) {
             try {
                 actors.add(npc.clone());
             } catch (CloneNotSupportedException exception) {
