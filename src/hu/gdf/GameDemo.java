@@ -24,6 +24,10 @@ public class GameDemo{
         }
     }
     
+    public List<Actor> getActors() {
+        return actors;
+    }
+    
     private void initActors() {
         actors = new ArrayList();
         NonPlayerCharacter npc = new NonPlayerCharacter("Villager");
